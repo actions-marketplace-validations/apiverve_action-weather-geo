@@ -1,6 +1,6 @@
 {
   "name": "@apiverve/action-weather-geo",
-  "version": "0.1.0-beta",
+  "version": "1.0.0",
   "description": "Get weather data, timezone information, and geographic calculations",
   "main": "dist/index.js",
   "scripts": {

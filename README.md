@@ -1,10 +1,8 @@
-# APIVerve Weather &amp; Geo Action
+# APIVerve Weather & Geo Action
 
 > Get weather data, timezone information, and geographic calculations
 
-> **Beta Release** - This action is in beta. We'd love your feedback! [Open an issue](https://github.com/apiverve/action-weather-geo/issues) if you encounter any problems.
-
-[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Weather &amp; Geo-blue?logo=github)](https://github.com/marketplace/actions/apiverve-weather-geo)
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Weather_%26_Geo-blue?logo=github)](https://github.com/apiverve/action-weather-geo)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **[Browse All APIs](https://apiverve.com/marketplace?utm_source=github&utm_medium=action&utm_campaign=weather-geo)** | **[Get Free API Key](https://dashboard.apiverve.com/signup?utm_source=github&utm_medium=action&utm_campaign=weather-geo)** | **[Documentation](https://docs.apiverve.com?utm_source=github&utm_medium=action&utm_campaign=weather-geo)**
@@ -13,7 +11,7 @@
 
 ## What does this action do?
 
-This action provides access to APIVerve's Weather &amp; Geo APIs directly in your GitHub workflows:
+This action provides access to APIVerve's Weather & Geo APIs directly in your GitHub workflows:
 
 - Get current weather conditions
 - Get time in different timezones
@@ -24,23 +22,23 @@ This action provides access to APIVerve's Weather &amp; Geo APIs directly in you
 
 | API | Description |
 |-----|-------------|
-| `weather` | weather API |
-| `worldtime` | World Time is a simple tool for getting the current time in any city. It returns the current time, date, and more. |
-| `timezonelookup` | Timezone Lookup is a simple tool for looking up timezone data. It returns the timezone name, offset, and more. |
-| `distancecalculator` | Distance Calculator is a simple tool for calculating the distance between two locations. It returns the distance in miles and kilometers. |
-| `sunrisesunset` | Sunrise Sunset is a simple tool for getting the sunrise and sunset times. It returns the sunrise and sunset times for a given location and date. |
+| `weatherforecast` | Weather reports current weather conditions for any city name or zip code. It provides real-time temperature and wind speed along with compass direction in both metric and imperial units. |
+| `worldtime` | World Time looks up the current local time, date, and timezone for any city. Search by city name to get matching locations with country codes, IANA timezone identifiers, and formatted times in 12-hour and 24-hour formats. |
+| `timezonelookup` | Timezone Lookup resolves any city or IANA zone name to its local time, UTC offset, and calendar date. Responses include 12-hour and 24-hour clocks plus the minute offset from GMT. |
+| `distancecalculator` | Distance Calculator computes the distance between two coordinate pairs in miles and kilometers. Supply two latitude and longitude points to receive distances and resolved city and state names for both locations. |
+| `sunrisesunset` | Sunrise Sunset calculates exact sunrise and sunset times, twilight stages, and golden hour windows for any latitude and longitude coordinates. Paid plans can specify custom dates and receive solar noon. |
 
 ---
 
 ## Quick Start
 
 ```yaml
-- name: Weather &amp; Geo
+- name: Weather & Geo
   uses: apiverve/action-weather-geo@v1
   with:
     api_key: ${{ secrets.APIVERVE_KEY }}
-    api: weather
-    params: '{&quot;city&quot;: &quot;New York&quot;}'
+    api: weatherforecast
+    params: '{"city": "New York"}'
 ```
 
 ---
@@ -61,11 +59,11 @@ Go to your repository **Settings** → **Secrets and variables** → **Actions**
 ### 3. Use in Workflow
 
 ```yaml
-- name: Weather &amp; Geo
+- name: Weather & Geo
   uses: apiverve/action-weather-geo@v1
   with:
     api_key: ${{ secrets.APIVERVE_KEY }}
-    api: weather
+    api: weatherforecast
     params: '{"your": "parameters"}'
 ```
 
@@ -76,12 +74,11 @@ Go to your repository **Settings** → **Secrets and variables** → **Actions**
 | Input | Description | Required | Default |
 |-------|-------------|----------|---------|
 | `api_key` | Your APIVerve API key (or set `APIVERVE_API_KEY` env var) | Yes* | - |
-| `api` | API to use: `weather`, `worldtime`, `timezonelookup`, `distancecalculator`, `sunrisesunset` | No | `weather` |
+| `api` | API to use: `weatherforecast`, `worldtime`, `timezonelookup`, `distancecalculator`, `sunrisesunset` | No | `weatherforecast` |
 | `params` | JSON parameters for the API | No | `{}` |
 | `output_file` | Path to save binary output (images, PDFs) | No | - |
 | `format` | Response format: `json`, `yaml`, or `xml` | No | `json` |
 | `fail_on_error` | Fail workflow if API returns error | No | `true` |
-
 *\*API key is required but can be provided via input OR `APIVERVE_API_KEY` / `APIVERVE_KEY` environment variable.*
 
 ## Outputs
@@ -92,7 +89,6 @@ Go to your repository **Settings** → **Secrets and variables** → **Actions**
 | `data` | The `data` field from response as JSON |
 | `status` | API status (`ok` or `error`) |
 | `file` | Path to downloaded file (if `output_file` was used) |
-
 ---
 
 ## Examples
@@ -107,8 +103,8 @@ Get current weather for a location
   uses: apiverve/action-weather-geo@v1
   with:
     api_key: ${{ secrets.APIVERVE_KEY }}
-    api: weather
-    params: '{&quot;city&quot;: &quot;New York&quot;}'
+    api: weatherforecast
+    params: '{"city": "New York"}'
 
 - name: Use result
   run: echo "Result: ${{ steps.weather-geo-0.outputs.data }}"
@@ -125,7 +121,7 @@ Get current time in a timezone
   with:
     api_key: ${{ secrets.APIVERVE_KEY }}
     api: worldtime
-    params: '{&quot;timezone&quot;: &quot;America/New_York&quot;}'
+    params: '{"city": "New York"}'
 
 - name: Use result
   run: echo "Result: ${{ steps.weather-geo-1.outputs.data }}"
@@ -137,7 +133,7 @@ Get current time in a timezone
 ## Full Workflow Example
 
 ```yaml
-name: Weather &amp; Geo Workflow
+name: Weather & Geo Workflow
 
 on:
   push:
@@ -150,13 +146,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run Weather &amp; Geo
+      - name: Run Weather & Geo
         id: result
         uses: apiverve/action-weather-geo@v1
         with:
           api_key: ${{ secrets.APIVERVE_KEY }}
-          api: weather
-          params: '{&quot;city&quot;: &quot;New York&quot;}'
+          api: weatherforecast
+          params: '{"city": "New York"}'
 
       - name: Show result
         run: |

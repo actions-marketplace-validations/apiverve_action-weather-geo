@@ -1,4 +1,4 @@
-name: 'APIVerve Weather &amp; Geo'
+name: 'APIVerve Weather & Geo'
 description: 'Get weather data, timezone information, and geographic calculations'
 author: 'APIVerve'
 branding:
@@ -10,9 +10,9 @@ inputs:
     description: 'Your APIVerve API key. Can also be set via APIVERVE_API_KEY env var.'
     required: false
   api:
-    description: 'The API to use. Options: weather, worldtime, timezonelookup, distancecalculator, sunrisesunset'
+    description: 'The API to use. Options: weatherforecast, worldtime, timezonelookup, distancecalculator, sunrisesunset'
     required: false
-    default: 'weather'
+    default: 'weatherforecast'
   params:
     description: 'JSON parameters to pass to the API'
     required: false
@@ -40,5 +40,5 @@ outputs:
     description: 'Path to the downloaded file (if output_file was specified)'
 
 runs:
-  using: 'node20'
+  using: 'node24'
   main: 'dist/index.js'
